@@ -36,7 +36,6 @@ using Microsoft.EntityFrameworkCore;
 using EcommerceWebsiteMovie.Data;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.Extensions.Configuration;
-using EcommerceWebsiteMovie.Data.Services;
 
 public class Startup
 {
@@ -56,7 +55,6 @@ public class Startup
         services.AddMvc();
         // Other service configurations
         services.AddControllersWithViews();
-        services.AddScoped<IActorsService, ActorService>();
 
     }
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -80,10 +78,13 @@ public class Startup
         {
             endpoints.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Movies}/{action=Index}/{id?}");
+                pattern: "{controller=Home}/{action=Index}/{id?}");
         });
         app.UseSession();
-        
+        app.Run(async (context) =>
+          {
+               await context.Response.WriteAsync("Hello kashim!");
+           });
         appDbInitializer.Seed(app);
       }
 

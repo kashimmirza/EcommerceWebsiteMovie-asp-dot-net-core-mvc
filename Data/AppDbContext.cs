@@ -14,21 +14,6 @@ namespace EcommerceWebsiteMovie.Data
         }
 
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Actor_Movie>().HasKey(am => new
-        //    {
-        //        am.ActorId,
-        //        am.MovieId
-        //    });
-        //    //modelBuilder.Entity<Actor_Movie>().HasOne(modelBuilder => modelBuilder.Movie).WithMany(AbandonedMutexException => AbandonedMutexException.Actor_Movies).HasForeignKey(m => m.MovieId);
-        //    //modelBuilder.Entity<Actor_Movie>().HasOne(m => m.Actors.WithMany(am => am.Actor_Movie).HasForeignKey(m => m.ActorId);
-        //    modelBuilder.Entity<Actor_Movie>().HasOne(m => m.Movie).WithMany(am => am.Actor_Movies).HasForeignKey(m => m.MovieId);
-        //    modelBuilder.Entity<Actor_Movie>().HasOne(m => m.Actors).WithMany(am => am.Actor_Movies).HasForeignKey(m => m.ActorId);
-
-        //    base.OnModelCreating(modelBuilder);
-        //}
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Actor_Movie>().HasKey(am => new
@@ -36,16 +21,10 @@ namespace EcommerceWebsiteMovie.Data
                 am.ActorId,
                 am.MovieId
             });
-
-            modelBuilder.Entity<Actor_Movie>()
-                .HasOne(am => am.Movie)
-                .WithMany(m => m.Actor_Movies)
-                .HasForeignKey(am => am.MovieId);
-
-            modelBuilder.Entity<Actor_Movie>()
-                .HasOne(am => am.Actors)
-                .WithMany(a => a.Actor_Movies)
-                .HasForeignKey(am => am.ActorId);
+            //modelBuilder.Entity<Actor_Movie>().HasOne(modelBuilder => modelBuilder.Movie).WithMany(AbandonedMutexException => AbandonedMutexException.Actor_Movies).HasForeignKey(m => m.MovieId);
+            //modelBuilder.Entity<Actor_Movie>().HasOne(m => m.Actors.WithMany(am => am.Actor_Movie).HasForeignKey(m => m.ActorId);
+            modelBuilder.Entity<Actor_Movie>().HasOne(m => m.Movie).WithMany(am => am.Actor_Movies).HasForeignKey(m => m.MovieId);
+            modelBuilder.Entity<Actor_Movie>().HasOne(m => m.Actors).WithMany(am => am.Actor_Movie).HasForeignKey(m => m.ActorId);
 
             base.OnModelCreating(modelBuilder);
         }
